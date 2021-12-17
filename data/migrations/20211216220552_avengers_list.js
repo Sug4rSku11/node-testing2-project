@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-  return knex.schema.createTable('avengers_list', tbl => {
+  return knex.schema.createTable('avengers', tbl => {
       tbl.increments()
       tbl.string('name', 20)
          .unique()
@@ -9,5 +9,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('avengers_list')
+  return knex.schema.dropTableIfExists('avengers')
 };
