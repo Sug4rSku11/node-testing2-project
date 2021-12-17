@@ -7,41 +7,35 @@ router.get('/', (req, res, next) => {
     .then(avengers => {
         res.status(200).json(avengers)
     })
-    .catch(next)
+    .catch(err => {
+        res.status(500).json(err)
+    })
 })
 
 router.get('/:id', (req, res, next) => {
-    Avenger.getById(req.params.id)
-    .then(avenger => {
-        if(avenger){
-            res.status(200).json(avenger)
-        } else {
-            res.status(400).json({
-                message: 'That avenger is not on the list'
-            })
-        }
-    })
-    .catch(next)
+    res.end()
     
 })
-// router.put('/:id',  async (req, res, next) => {
-//     Avenger.update(req.params.id, {name: req.name})
-//     .then(() => {
-//       return Avenger.getById(req.params.id)
-//     })
-//     .then(avengers => {
-//       res.json(avengers)
-//     })
-//     .then(avengers => {
-//         res.status(201).json(avengers)
-//     })
-//     .catch(next)
-//   });
-// router.post('/',async (req, res, next) => {
-//     res
-//     .status(201)
-//     .json(await Avenger.insert(req.body))
-//     })
+router.put('/:id',  async (req, res, next) => {
+    Avenger.update(req.params.id, {name: req.name})
+    .then(() => {
+      return Avenger.getById(req.params.id)
+    })
+    .then(avengers => {
+      res.json(avengers)
+    })
+    .then(avengers => {
+        res.status(201).json(avengers)
+    })
+    .catch(next)
+  });
+router.post('/',async (req, res, next) => {
+    Avenger.insert({name: req.name})
+    .then(newAvenger =>{
+        res.status(201).json(newAvenger)
+    })
+    .catch(next)
+    })
     
 
 

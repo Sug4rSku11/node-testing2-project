@@ -16,7 +16,6 @@ function insert(avenger) {
             .then(([id]) => {
                 return getById(id)
             })
-           
 }
 
 function update(id, changes) {
